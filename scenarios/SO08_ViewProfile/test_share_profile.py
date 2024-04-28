@@ -5,7 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains  
-from constantsSO8_SO16_SO18.globalConstants import *
+from constants.constantsSO8_SO16_SO18.globalConstants import *
 
 
 class Test_Scenario8:
@@ -35,6 +35,7 @@ class Test_Scenario8:
     def actions(self,locator):
         actions = ActionChains(self.driver)
         actions.move_to_element(locator).perform()
+    
 
 
     # Senaryo 8 Ön Koşulu (Muhsine Taşcı)
