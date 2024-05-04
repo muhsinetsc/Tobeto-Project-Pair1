@@ -116,9 +116,9 @@ FULL_EDUCATION_AND_EXPERIENCE_XPATH = (By.XPATH,"//*[@id='__next']/div/main/div/
 FULL_EDUCATION_AND_EXPERIENCE_TEXT = "İstanbul Üniversitesi Cerrahpaşa"  
 
 
-
+ 
 #MediaAccounts dosyası test_edit_media_account.py
-
+ 
 #"Medya Hesaplarim" bolumunun düzenlenmesi durumu
 CHOOSE1_XPATH = (By.XPATH,"//*[@id='__next']/div/main/section/div/div/div[2]/div/form/div/div[1]/select")
 INSTAGRAM_XPATH = (By.XPATH,"//*[@id='__next']/div/main/section/div/div/div[2]/div/form/div/div[1]/select/option[2]")
