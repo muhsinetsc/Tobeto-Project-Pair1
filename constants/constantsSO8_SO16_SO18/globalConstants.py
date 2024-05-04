@@ -117,7 +117,6 @@ FULL_EDUCATION_AND_EXPERIENCE_TEXT = "İstanbul Üniversitesi Cerrahpaşa"
 
 
 
-
 #MediaAccounts dosyası test_edit_media_account.py
 
 #"Medya Hesaplarim" bolumunun düzenlenmesi durumu
