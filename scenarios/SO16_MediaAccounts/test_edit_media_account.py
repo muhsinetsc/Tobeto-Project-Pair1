@@ -5,7 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains 
-from constantsSO8_SO16_SO18.globalConstants import *
+from constants.constantsSO8_SO16_SO18.globalConstants import *
 
 
 
@@ -90,7 +90,7 @@ class Test_Scenario16:
         assert pop_up_message1.text == POP_UP_MESSAGE_EDIT_TEXT
         time.sleep(2)
         self.waitUrlMedia(WAIT_URL_MEDIA)
-        self.take_screenshot("SO16_MediaAccounts//ScreenshotSO16//lost_boxes_{}.png")
+        self.take_screenshot("scenarios//SO16_MediaAccounts//ScreenshotSO16//lost_boxes_{}.png")
         delete_instagram = self.waitForElementVisible(DELETE_INSTAGRAM_XPATH)
         delete_instagram.click()
         time.sleep(2)
@@ -142,7 +142,7 @@ class Test_Scenario16:
         updateButton2 = self.waitForElementVisible(UPDATEBUTTON2_CSS_SELECTOR)
         updateButton2.click()
         time.sleep(1)
-        self.take_screenshot("SO16_MediaAccounts//ScreenshotSO16//error_message_forbidden_{}.png")
+        self.take_screenshot("scenarios//SO16_MediaAccounts//ScreenshotSO16//error_message_forbidden_{}.png")
         error_message_update = self.waitForElementVisible(ERROR_MESSAGE_UPDATE_XPATH)
         assert error_message_update.text == ERROR_MESSAGE_UPDATE_TEXT
         self.teardown_method()

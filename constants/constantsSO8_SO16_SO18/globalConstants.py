@@ -106,7 +106,7 @@ FULL_MY_FOREING_LANGUAGES_TEXT = "İngilizce"
 FULL_MY_CERTIFICATES_XPATH = (By.XPATH,"//*[@id='certificate_name']/span[1]")
 FULL_MY_CERTIFICATES_TEXT = "Herkes İcin Kodlama.jpeg"
 FULL_MY_CERTIFICATES_DOWLOAD_XPATH = (By.XPATH,"//*[@id='certificate_name']")  
-BEHANCE_CLICK_XPATH = (By.XPATH,"//*[@id='__next']/div/main/div/div[2]/div[1]/div/div[6]/div/div[2]/a[3]")
+BEHANCE_CLICK_XPATH = (By.XPATH,"//*[@id='__next']/div/main/div/div[2]/div[1]/div/div[6]/div/div[2]/a")
 
 #"Degerlendirme Sonuclari" nin,"Tobeto Seviye Testlerim" in,"Yetkinlik Rozetlerim" in, "Aktivite Haritasi" nin,"Egitim Hayatim ve Deneyimlerim" in goruntulenme durumu 
 FULL_SCORE_TYPE_LIST_CLASS_NAME = (By.CLASS_NAME,"legendName")
