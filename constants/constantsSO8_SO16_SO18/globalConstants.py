@@ -49,6 +49,8 @@ EDITBUTTON_XPATH = (By.XPATH,"//*[@id='__next']/div/main/div/div[1]/div/span")
 SETTINGS_XPATH = (By.XPATH,"//*[@id='__next']/div/main/section/div/div/div[1]/div/a[8]/span[2]")
 
 
+
+
 #ViewProfile dosyası test_share_profile.py
 
 #Profilim sayfasinda gezinme durumu , "Profil Bilgilerini Duzenle"ve "Profilimi Paylas" butonlarinin calisma durumu
@@ -60,8 +62,8 @@ POP_UP_MESSAGE_SHARE_TEXT = "• Url kopyalandı."
 EDITBUTTON_SHARE_XPATH = (By.XPATH,"//*[@id='__next']/div/main/div/div[1]/div/span") 
 EDIT_MY_PROFILE_MY_PERSONAL_INFORMATION_URL = "profilimi-duzenle/kisisel-bilgilerim"
 
-
-#"Hakkimda", "Yetkinliklerim", "Yabanci Dillerim","Sertifikalarim","Medya Hesaplarim" bolumlerinin bos  goruntulenme durumu (BUG)
+#"Hakkimda", "Yetkinliklerim", "Yabanci Dillerim","Sertifikalarim","Medya Hesaplarim"
+# bolumlerinin bos  goruntulenme durumu (BUG)
 ABOUTE_ME_ID = (By.ID,"user_desc")
 ABOUTE_ME_TEXT = "Kendini kısaca anlat."  
 NULL_MY_COMPETENCIES_XPATH = (By.XPATH,"//*[@id='__next']/div/main/div/div[2]/div[1]/div/div[3]/div/div[2]/div")
@@ -73,7 +75,6 @@ NULL_MY_FOREIGN_LANGUAGES_TEXT = "Henüz bir yabancı dil eklemedin."
 NULL_MY_CERTIFICATES_TEXT = "Henüz bir sertifika yüklemedin."
 NULL_MY_MEDIA_ACCOUNTS_TEXT = "Henüz bir hesap eklemedin."
 
-
 #"Tobeto İste Basari Modelim" bolumunun goruntulenmesi ve tıklanmasi durumu
 EYEBUTTON_TOBETO_XPATH = (By.XPATH,"//*[@id='__next']/div/main/div/div[2]/div[2]/div/div[1]/div/div[1]/div/span[2]")
 POP_UPP_MESSAGE_TOBETO_XPATH = (By.XPATH,"//div[@id='__next']//div[@role='alert']/div[@class='toast-body']")
@@ -82,7 +83,8 @@ TOBETO_COM_PROFILIM = "https://tobeto.com/profilim"
 STARTBUTTON_TOBETO_CSS_SELECTOR = (By.CSS_SELECTOR,"#__next > div > main > div > div:nth-child(2) > div.col-md-8.col-12 > div > div:nth-child(1) > div > div.model-padding > div > a")
 PROFILIM_DEGERLENDIRMELER_TOBETO_ISTE_BASARI_MODELI_URL = "profilim/degerlendirmeler/tobeto-iste-basari-modeli"
 
-#"Tobeto Seviye Testlerim","Yetkinlik Rozetlerim","Aktivite Haritam","Eğitim Hayatım ve Deneyimlerim" bolumlerinin bos goruntulenmesi durumu
+#"Tobeto Seviye Testlerim","Yetkinlik Rozetlerim","Aktivite Haritam","Eğitim Hayatım ve Deneyimlerim" 
+#bolumlerinin bos goruntulenmesi durumu
 NULL_MY_LEVEL_TEST_XPATH = (By.XPATH,"//*[@id='__next']/div/main/div/div[2]/div[2]/div/div[2]/div/div[2]/div")
 NULL_MY_COMPETENCY_BADGES_XPATH = (By.XPATH,"//*[@id='__next']/div/main/div/div[2]/div[2]/div/div[3]/div/div[2]/div")
 NULL_MY_ACTIVITY_MAP_CSS_SELECTOR = (By.CSS_SELECTOR,"#__next > div > main > div > div:nth-child(2) > div.col-md-8.col-12 > div > div:nth-child(4) > div > svg > g.react-calendar-heatmap-all-weeks > g:nth-child(1) > rect:nth-child(1)")
@@ -90,7 +92,6 @@ NULL_EDUCATION_AND_EXPERIENCE_XPATH = (By.XPATH,"//*[@id='__next']/div/main/div/
 NULL_MY_LEVEL_TEST_TEXT = "Henüz bir sınava girmediniz."
 NULL_MY_COMPETENCY_TEXT = "Henüz bir rozet kazanmadın. Değerlendirmeleri çöz, eğitimleri tamamla, rozetlerini kazan."
 NULL_EDUCATION_AND_EXPERIENCE_TEXT = "Henüz bir eğitim ve deneyim bilgisi eklemedin."
-
 
 #"Kisisel Bilgilerim", "Hakkimda", "Yetkinliklerim", "Yabanci Dillerim","Sertifikalarim","Medya Hesaplarım" goruntulenme durumu
 PROFILE_IMAGE_XPATH = (By.XPATH,"//*[@id='__next']/div/main/div/div[2]/div[1]/div/div[1]/div/div[1]/img")
@@ -106,9 +107,10 @@ FULL_MY_FOREING_LANGUAGES_TEXT = "İngilizce"
 FULL_MY_CERTIFICATES_XPATH = (By.XPATH,"//*[@id='certificate_name']/span[1]")
 FULL_MY_CERTIFICATES_TEXT = "Herkes İcin Kodlama.jpeg"
 FULL_MY_CERTIFICATES_DOWLOAD_XPATH = (By.XPATH,"//*[@id='certificate_name']")  
-BEHANCE_CLICK_XPATH = (By.XPATH,"//*[@id='__next']/div/main/div/div[2]/div[1]/div/div[6]/div/div[2]/a[3]")
+BEHANCE_CLICK_XPATH = (By.XPATH,"//*[@id='__next']/div/main/div/div[2]/div[1]/div/div[6]/div/div[2]/a")
 
-#"Degerlendirme Sonuclari" nin,"Tobeto Seviye Testlerim" in,"Yetkinlik Rozetlerim" in, "Aktivite Haritasi" nin,"Egitim Hayatim ve Deneyimlerim" in goruntulenme durumu 
+#"Degerlendirme Sonuclari" nin,"Tobeto Seviye Testlerim" in,"Yetkinlik Rozetlerim" in, 
+#"Aktivite Haritasi" nin,"Egitim Hayatim ve Deneyimlerim" in goruntulenme durumu 
 FULL_SCORE_TYPE_LIST_CLASS_NAME = (By.CLASS_NAME,"legendName")
 FULL_MY_COMPETENCY_BADGES_CLASS_NAME = (By.CLASS_NAME,"img-fluid")
 FULL_MY_ACTIVITY_MAP_CSS_SELECTOR = (By.CSS_SELECTOR,"#__next > div > main > div > div:nth-child(2) > div.col-md-8.col-12 > div > div:nth-child(4) > div > svg > g.react-calendar-heatmap-all-weeks > g:nth-child(52) > rect:nth-child(1)")
@@ -138,7 +140,6 @@ DELETE_INSTAGRAM_XPATH = (By.XPATH,"//*[@id='__next']/div/main/section/div/div/d
 YESSBUTTON_MEDIA_CSS_SELECTOR = (By.CSS_SELECTOR,"body > div.fade.alert-modal.modal.show > div > div > div > div > div > div.alert-buttons > button.btn.btn-yes.my-3")
 POP_UP_MESSAGE_DELETE_XPATH = (By.XPATH,"//div[@id='__next']//div[@role='alert']/div[@class='toast-body']")
 POP_UP_MESSAGE_DELETE_TEXT = "• Sosyal medya adresiniz başarıyla kaldırıldı."
-
 
 #Doldurmasi zorunlu alanlarin bos birakilma durumu
 SAVEBUTTON_XPATH = (By.XPATH,"//*[@id='__next']/div/main/section/div/div/div[2]/div[1]/form/button")

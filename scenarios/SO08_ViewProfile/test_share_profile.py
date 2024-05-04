@@ -8,6 +8,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from constants.constantsSO8_SO16_SO18.globalConstants import *
 
 
+
 class Test_Scenario8:
     def setup_method(self):
         self.driver = webdriver.Chrome()
@@ -122,19 +123,20 @@ class Test_Scenario8:
         null_my_activity_map = self.waitForElementVisible(NULL_MY_ACTIVITY_MAP_CSS_SELECTOR)
         self.actions(null_my_activity_map)
         self.waitUrlShare(WAIT_URL_SHARE)
-        self.take_screenshot("SO08_ViewProfile//ScreenshotSO08//null_my_activity_{}.png")
+        self.take_screenshot("scenarios//SO08_ViewProfile//ScreenshotSO08//null_my_activity_{}.png")
         null_education_and_experience = self.waitForElementVisible(NULL_EDUCATION_AND_EXPERIENCE_XPATH)
         assert {null_my_level_tests.text == NULL_MY_LEVEL_TEST_TEXT and 
                 null_my_competency_badges.text == NULL_MY_COMPETENCY_TEXT and 
                 null_education_and_experience.text == NULL_EDUCATION_AND_EXPERIENCE_TEXT}
         
-    #"Kisisel Bilgilerim", "Hakkimda", "Yetkinliklerim", "Yabanci Dillerim","Sertifikalarim","Medya Hesaplarım" goruntulenme durumu
+    #"Kisisel Bilgilerim", "Hakkimda", "Yetkinliklerim", "Yabanci Dillerim","Sertifikalarim",
+    #"Medya Hesaplarım" goruntulenme durumu
     def test_left_viewing_status(self):
         self.pre_condition_view1()
         profile_image = self.waitForElementVisible(PROFILE_IMAGE_XPATH)
         profile_image_url = profile_image.get_attribute(PROFILE_IMAGE_URL)
         print(profile_image_url)
-        self.take_screenshot("SO08_ViewProfile//ScreenshotSO08//profile_image_{}.png")
+        self.take_screenshot("scenarios//SO08_ViewProfile//ScreenshotSO08//profile_image_{}.png")
         full_aboute_me = self.waitForElementVisible(FULL_ABOUTE_ME_ID)
         self.driver.execute_script("window.scrollTo(0,600)")
         self.waitUrlShare(WAIT_URL_SHARE)
@@ -170,7 +172,7 @@ class Test_Scenario8:
         self.driver.execute_script("window.scrollTo(0,750)")
         self.driver.execute_script("document.body.style.zoom='150%'")
         time.sleep(1)
-        self.take_screenshot("SO08_ViewProfile//ScreenshotSO08//full_my_level_tests_{}.png")
+        self.take_screenshot("scenarios//SO08_ViewProfile//ScreenshotSO08//full_my_level_tests_{}.png")
         full_my_competency_badges = self.waitForElementsVisible(FULL_MY_COMPETENCY_BADGES_CLASS_NAME)
         assert len(full_my_competency_badges) == 23
         self.driver.execute_script("document.body.style.zoom='100%'")
@@ -179,6 +181,6 @@ class Test_Scenario8:
         full_my_activity_map = self.waitForElementVisible(FULL_MY_ACTIVITY_MAP_CSS_SELECTOR)
         time.sleep(1)
         self.actions(full_my_activity_map)
-        self.take_screenshot("SO08_ViewProfile//ScreenshotSO08//full_my_activity_{}.png")
+        self.take_screenshot("scenarios//SO08_ViewProfile//ScreenshotSO08//full_my_activity_{}.png")
         full_education_and_experience = self.waitForElementVisible(FULL_EDUCATION_AND_EXPERIENCE_XPATH)
         assert full_education_and_experience.text == FULL_EDUCATION_AND_EXPERIENCE_TEXT

@@ -7,6 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from constants.constantsSO8_SO16_SO18.globalConstants import *
 
 
+
 class Test_Scenario18:   
     def setup_method(self):
         self.driver = webdriver.Chrome()
@@ -127,8 +128,7 @@ class Test_Scenario18:
         yesButton_terminate = self.waitForElementVisible(YESBUTTON_TERMINATE_CSS_SELECTOR)
         yesButton_terminate.click()
         time.sleep(1)
-        #self.driver.save_screenshot("SO18_SettingTobeto//error_message_not_found.png") # error_message ekran görüntüsünü alıyor
-        self.take_screenshot("SO18_SettingTobeto//ScreenshotSO18//error_message_not_found_{}.png") 
+        self.take_screenshot("scenarios//SO18_SettingTobeto//ScreenshotSO18//error_message_not_found_{}.png") 
         error_message_terminate = self.waitForElementVisible(ERROR_MESSAGE_TERMINATE_XPATH)
         assert error_message_terminate.text == ERROR_MESSAGE_TERMINATE_TEXT
     
