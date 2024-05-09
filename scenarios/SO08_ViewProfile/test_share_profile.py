@@ -1,74 +1,15 @@
 import pytest
 import time
-from datetime import datetime
-from selenium import webdriver
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.action_chains import ActionChains  
+from help.helpers import functions
 from constants.constantsSO8_SO16_SO18.globalConstants import *
 
 
 
-class Test_Scenario8:
-    def setup_method(self):
-        self.driver = webdriver.Chrome()
-        self.driver.maximize_window()                  
-        self.driver.get(BASE_URL)
-
-    def teardown_method(self):
-        self.driver.quit()
-
-    def waitForElementVisible(self, locator, timeout= 20):
-        return WebDriverWait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
-    
-    def waitForElementsVisible(self, locator, timeout = 20):
-        return WebDriverWait(self.driver, timeout).until(EC.visibility_of_all_elements_located(locator))
-    
-    def waitUrlShare(self,wait_url,timeout=20):
-        wait_url = WAIT_URL_SHARE
-        WebDriverWait(self.driver,timeout).until(EC.url_to_be(wait_url))
-
-    def take_screenshot(self, filename):
-        date_and_time = datetime.now()
-        date_time = date_and_time.strftime("%Y-%m-%d %H-%M-%S")
-        self.driver.get_screenshot_as_file(filename.format(date_time))
-
-    def actions(self,locator):
-        actions = ActionChains(self.driver)
-        actions.move_to_element(locator).perform()
-    
+@pytest.mark.usefixtures("setup")
+class Test_Scenario8(functions):
 
 
-    # Senaryo 8 Ön Koşulu (Muhsine Taşcı)
-    def pre_condition_view1(self):
-        e_mail = self.waitForElementVisible(E_MAIL_XPATH)
-        e_mail.send_keys(E_MAIL_VIEW1)
-        password = self.waitForElementVisible(PASSWORD_XPATH)
-        password.send_keys(PASSWORD_VIEW1)
-        loginButton = self.waitForElementVisible(LOGINBUTTON_XPATH)
-        loginButton.click()
-        pop_up_close = self.waitForElementVisible(POP_UP_CLOSE_XPATH)
-        pop_up_close.click()
-        profileButton = self.waitForElementVisible(PROFILEBUTTON_XPATH)
-        profileButton.click()
-        
-
-    # Senaryo 8 Ön Koşulu (Muhsine Taşcı2)
-    def pre_condition_view2(self):
-        e_mail = self.waitForElementVisible(E_MAIL_XPATH)
-        e_mail.send_keys(E_MAIL_VIEW2)
-        password = self.waitForElementVisible(PASSWORD_XPATH)
-        password.send_keys(PASSWORD_VIEW2)
-        loginButton = self.waitForElementVisible(LOGINBUTTON_XPATH)
-        loginButton.click()
-        pop_up_close = self.waitForElementVisible(POP_UP_CLOSE_XPATH)
-        pop_up_close.click()
-        profileButton = self.waitForElementVisible(PROFILEBUTTON_XPATH)
-        profileButton.click()
-
-
-
-    #Profilim sayfasinda gezinme durumu , "Profil Bilgilerini Duzenle"ve 
+    # SO08/TC1- Profilim sayfasinda gezinme durumu , "Profil Bilgilerini Duzenle"ve 
     #"Profilimi Paylas" butonlarinin calisma durumu
     def test_share_profile1(self):
         self.pre_condition_view1()
@@ -84,7 +25,7 @@ class Test_Scenario8:
         editButton_share.click()
         assert EDIT_MY_PROFILE_MY_PERSONAL_INFORMATION_URL in self.driver.current_url
   
-    #"Hakkimda", "Yetkinliklerim", "Yabanci Dillerim","Sertifikalarim",
+    # SO08/TC2- "Hakkimda", "Yetkinliklerim", "Yabanci Dillerim","Sertifikalarim",
     #"Medya Hesaplarim" bolumlerinin bos goruntulenme durumu (BUG)
     def test_left_null_viewing_status(self): 
         self.pre_condition_view2()
@@ -100,7 +41,7 @@ class Test_Scenario8:
                 null_my_media_accounts.text == NULL_MY_MEDIA_ACCOUNTS_TEXT and 
                 aboute_me.text == ABOUTE_ME_TEXT}
 
-    #"Tobeto İste Basari Modelim" bolumunun goruntulenmesi ve tıklanmasi durumu
+    # SO08/TC3- "Tobeto İste Basari Modelim" bolumunun goruntulenmesi ve tıklanmasi durumu
     def test_tobeto_success_model(self):
         self.pre_condition_view2()
         eyeButton_tobeto = self.waitForElementVisible(EYEBUTTON_TOBETO_XPATH)
@@ -113,7 +54,7 @@ class Test_Scenario8:
         startButton_tobeto.click()
         assert PROFILIM_DEGERLENDIRMELER_TOBETO_ISTE_BASARI_MODELI_URL in self.driver.current_url
 
-    #"Tobeto Seviye Testlerim","Yetkinlik Rozetlerim","Aktivite Haritam","Eğitim Hayatım ve 
+    # SO08/TC4- "Tobeto Seviye Testlerim","Yetkinlik Rozetlerim","Aktivite Haritam","Eğitim Hayatım ve 
     #"Deneyimlerim" bolumlerinin bos goruntulenmesi durumu
     def test_right_null_viewing_status(self):
         self.pre_condition_view2()
@@ -123,24 +64,23 @@ class Test_Scenario8:
         null_my_activity_map = self.waitForElementVisible(NULL_MY_ACTIVITY_MAP_CSS_SELECTOR)
         self.actions(null_my_activity_map)
         self.waitUrlShare(WAIT_URL_SHARE)
-        self.take_screenshot("scenarios//SO08_ViewProfile//ScreenshotSO08//null_my_activity_{}.png")
+        self.take_screenshot(NULL_MY_ACTIVITIY)
         null_education_and_experience = self.waitForElementVisible(NULL_EDUCATION_AND_EXPERIENCE_XPATH)
         assert {null_my_level_tests.text == NULL_MY_LEVEL_TEST_TEXT and 
                 null_my_competency_badges.text == NULL_MY_COMPETENCY_TEXT and 
                 null_education_and_experience.text == NULL_EDUCATION_AND_EXPERIENCE_TEXT}
         
-    #"Kisisel Bilgilerim", "Hakkimda", "Yetkinliklerim", "Yabanci Dillerim","Sertifikalarim",
+    # SO08/TC5- "Kisisel Bilgilerim", "Hakkimda", "Yetkinliklerim", "Yabanci Dillerim","Sertifikalarim",
     #"Medya Hesaplarım" goruntulenme durumu
     def test_left_viewing_status(self):
         self.pre_condition_view1()
         profile_image = self.waitForElementVisible(PROFILE_IMAGE_XPATH)
         profile_image_url = profile_image.get_attribute(PROFILE_IMAGE_URL)
         print(profile_image_url)
-        self.take_screenshot("scenarios//SO08_ViewProfile//ScreenshotSO08//profile_image_{}.png")
+        self.take_screenshot(PROFIL_IMAGE)
         full_aboute_me = self.waitForElementVisible(FULL_ABOUTE_ME_ID)
         self.driver.execute_script("window.scrollTo(0,600)")
         self.waitUrlShare(WAIT_URL_SHARE)
-        time.sleep(1)
         eyeButton_competencies = self.waitForElementVisible(EYEBUTTON_COMPETENCIES_CSS_SELECTOR)
         eyeButton_competencies.click()
         full_my_competencies = self.waitForElementsVisible(FULL_MY_COMPETENCIES_CLASS_NAME)
@@ -163,7 +103,7 @@ class Test_Scenario8:
         behance_click = self.waitForElementVisible(BEHANCE_CLICK_XPATH)
         behance_click.click()
 
-    #"Degerlendirme Sonuclari" nin,"Tobeto Seviye Testlerim" in,"Yetkinlik Rozetlerim" in, 
+    # SO08/TC6- "Degerlendirme Sonuclari" nin,"Tobeto Seviye Testlerim" in,"Yetkinlik Rozetlerim" in, 
     #"Aktivite Haritasi" nin,"Egitim Hayatim ve Deneyimlerim" in goruntulenme durumu
     def test_right_viewing_status(self):
         self.pre_condition_view1()
@@ -172,7 +112,7 @@ class Test_Scenario8:
         self.driver.execute_script("window.scrollTo(0,750)")
         self.driver.execute_script("document.body.style.zoom='150%'")
         time.sleep(1)
-        self.take_screenshot("scenarios//SO08_ViewProfile//ScreenshotSO08//full_my_level_tests_{}.png")
+        self.take_screenshot(FULL_MY_LEVEL_TEST)
         full_my_competency_badges = self.waitForElementsVisible(FULL_MY_COMPETENCY_BADGES_CLASS_NAME)
         assert len(full_my_competency_badges) == 23
         self.driver.execute_script("document.body.style.zoom='100%'")
@@ -181,6 +121,6 @@ class Test_Scenario8:
         full_my_activity_map = self.waitForElementVisible(FULL_MY_ACTIVITY_MAP_CSS_SELECTOR)
         time.sleep(1)
         self.actions(full_my_activity_map)
-        self.take_screenshot("scenarios//SO08_ViewProfile//ScreenshotSO08//full_my_activity_{}.png")
+        self.take_screenshot(FULL_MY_ACTICITY)
         full_education_and_experience = self.waitForElementVisible(FULL_EDUCATION_AND_EXPERIENCE_XPATH)
         assert full_education_and_experience.text == FULL_EDUCATION_AND_EXPERIENCE_TEXT

@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 
 
+
 #URL Globals
 BASE_URL = "https://tobeto.com/giris"
 WAIT_URL_SHARE = "https://tobeto.com/profilim"
@@ -137,9 +138,12 @@ SOCIAL_MEDIA_LINKEDIN = "https://www.linkedin.com/"
 GITHUB_XPATH = (By.XPATH,"//*[@id='__next']/div/main/section/div/div/div[2]/div/form/div/div[1]/select/option[7]")
 SOCIAL_MEDIA_GITHUB = "https://www.github.com/"
 DELETE_INSTAGRAM_XPATH = (By.XPATH,"//*[@id='__next']/div/main/section/div/div/div[2]/div[1]/div/btn[1]")
-YESSBUTTON_MEDIA_CSS_SELECTOR = (By.CSS_SELECTOR,"body > div.fade.alert-modal.modal.show > div > div > div > div > div > div.alert-buttons > button.btn.btn-yes.my-3")
+YESBUTTON_MEDIA_CSS_SELECTOR = (By.CSS_SELECTOR,"body > div.fade.alert-modal.modal.show > div > div > div > div > div > div.alert-buttons > button.btn.btn-yes.my-3")
 POP_UP_MESSAGE_DELETE_XPATH = (By.XPATH,"//div[@id='__next']//div[@role='alert']/div[@class='toast-body']")
 POP_UP_MESSAGE_DELETE_TEXT = "• Sosyal medya adresiniz başarıyla kaldırıldı."
+DELETE_LINKEDIN_XPATH = (By.XPATH,"//*[@id='__next']/div/main/section/div/div/div[2]/div[2]/div/btn[1]")
+YESBUTTON_MEDIA_CSS_SELECTOR = (By.CSS_SELECTOR,"body > div.fade.alert-modal.modal.show > div > div > div > div > div > div.alert-buttons > button.btn.btn-yes.my-3")
+DELETE_GITHUB_XPATH = (By.XPATH,"//*[@id='__next']/div/main/section/div/div/div[2]/div[2]/div/btn[1]")
 
 #Doldurmasi zorunlu alanlarin bos birakilma durumu
 SAVEBUTTON_XPATH = (By.XPATH,"//*[@id='__next']/div/main/section/div/div/div[2]/div[1]/form/button")
@@ -156,6 +160,10 @@ SOCIAL_MEDIA_URL_CSS_SELECTOR = (By.CSS_SELECTOR,"#__next > div > main > section
 SAVEBUTTON_XPATH = (By.XPATH,"//*[@id='__next']/div/main/section/div/div/div[2]/div[1]/form/button")
 POP_UP_MESSAGE1_XPATH = (By.XPATH,"//div[@id='__next']//div[@role='alert']/div[@class='toast-body']")
 POP_UP_MESSAGE3_TEXT = "• Bu sosyal medya zaten mevcut."
+DELETE_GITHUB1_XPATH = (By.XPATH,"//*[@id='__next']/div/main/section/div/div/div[2]/div[2]/div/btn[1]")
+YESBUTTON_MEDIA_CSS_SELECTOR = (By.CSS_SELECTOR,"body > div.fade.alert-modal.modal.show > div > div > div > div > div > div.alert-buttons > button.btn.btn-yes.my-3")
+DELETE_GITHUB2_XPATH = (By.XPATH,"//*[@id='__next']/div/main/section/div/div/div[2]/div[3]/div/btn[1]")
+
 
 #Medya hesabinin güncellenme durumu (BUG)
 UPDATEBUTTON1_XPATH = (By.XPATH,"//*[@id='__next']/div/main/section/div/div/div[2]/div[2]/div/btn[2]/i")
@@ -240,3 +248,18 @@ NEW_PASSWORD_AGAIN_UPDATE = "456789"
 CHANGE_PASSWORD_UPDATE_XPATH = (By.XPATH,"//*[@id='__next']/div/main/section/div/div/div[2]/div/div/div[1]/button")
 POP_UP_MESSAGE_UPDATE_XPATH = (By.XPATH,"//div[@id='__next']//div[@role='alert']/div[@class='toast-body']")
 POP_UP_MESSAGE_UPDATE_TEXT = "• Şifreniz güncellenmiştir."
+OLD_PASSWORD_UPDATE2 = "456789"
+NEW_PASSWORD_UPDATE2 = "123456"
+NEW_PASSWORD_AGAIN_UPDATE2 = "123456"
+
+
+
+
+# Screenshot 
+NULL_MY_ACTIVITIY = "scenarios//SO08_ViewProfile//ScreenshotSO08//null_my_activity_{}.png" #test_share_profile.py
+PROFIL_IMAGE = "scenarios//SO08_ViewProfile//ScreenshotSO08//profile_image_{}.png" #test_share_profile.py
+FULL_MY_LEVEL_TEST = "scenarios//SO08_ViewProfile//ScreenshotSO08//full_my_level_tests_{}.png" #test_share_profile.py
+FULL_MY_ACTICITY = "scenarios//SO08_ViewProfile//ScreenshotSO08//full_my_activity_{}.png" #test_share_profile.py
+LOST_BOXES = "scenarios//SO16_MediaAccounts//ScreenshotSO16//lost_boxes_{}.png" #test_media_accounts.py
+ERROR_MESSAGE_FORBIDDEN = "scenarios//SO16_MediaAccounts//ScreenshotSO16//error_message_forbidden_{}.png" #test_media_accounts.py
+ERROR_MESSAGE_NOT_FOUND = "scenarios//SO18_SettingTobeto//ScreenshotSO18//error_message_not_found_{}.png" #test_settings.py 
