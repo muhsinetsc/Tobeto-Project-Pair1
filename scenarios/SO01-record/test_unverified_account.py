@@ -6,7 +6,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.wait import WebDriverWait
-from constantsS01_10_14_15.globalConstants import *
+from constants.constantsS01_10_14_15.globalConstants import *
 from time import sleep
 import pytest
 
