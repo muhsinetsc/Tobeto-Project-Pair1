@@ -2,12 +2,11 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.keys import Keys
-from constantsS01_10_14_15.globalConstants import *
+from constants.constantsSO01_SO10_SO14_S015.globalConstants import *
 from time import sleep
 import pytest 
 
@@ -18,7 +17,7 @@ class Test_Tobeto_Record:
     
     def setup_method(self, method):
          self.driver=webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
-         self.driver.get(base_url) 
+         self.driver.get(BASE_URL) 
          self.driver.maximize_window()         
 
     def teardown_method(self, method):
@@ -32,336 +31,335 @@ class Test_Tobeto_Record:
      
     # Kayit olma isleminin gerceklestirilebilmesi   
     def test_record(self):
-        firstName = self.WaitForElementVisible((By.NAME,firstName_name))
-        lastName = self.WaitForElementVisible((By.NAME,lastName_name))
-        email=self.WaitForElementVisible((By.NAME,email_name))
-        password=self.WaitForElementVisible((By.NAME,password_name))
-        passwordAgain=self.WaitForElementVisible((By.NAME,passwordAgain_name))
-        firstName.send_keys(record_firstName)
-        lastName.send_keys(record_lastname)
-        email.send_keys(record_email)
-        password.send_keys(record_password)
-        passwordAgain.send_keys(record_passwordAgain)
-        self.clickElementByJS(record_passwordAgain)
-        login_button=self.WaitForElementVisible((By.CSS_SELECTOR, login_button_selector))
+        firstName = self.WaitForElementVisible(FIRSTNAME_NAME)
+        lastName = self.WaitForElementVisible(LASTNAME_NAME)
+        email=self.WaitForElementVisible(EMAIL_NAME)
+        password=self.WaitForElementVisible(PASSWORD_NAME)
+        passwordAgain=self.WaitForElementVisible(PASSWORDAGAIN_NAME)
+        firstName.send_keys(RECORD_FIRSTNAME)
+        lastName.send_keys(RECORD_LASTNAME)
+        email.send_keys(RECORD_EMAIL)
+        password.send_keys(RECORD_PASSWORD)
+        passwordAgain.send_keys(RECORD_PASSWORD_AGAIN)
+        self.clickElementByJS(passwordAgain)
+        login_button=self.WaitForElementVisible(LOGIN_BUTTON_SELECTOR)
         login_button.click()
         #açık rıza metni
-        consent_text=self.WaitForElementVisible((By.NAME, consent_text_name))
+        consent_text=self.WaitForElementVisible(CONSENT_TEXT_NAME)
         consent_text.click()
         #üyelik sözleşmesi
-        membership_agreement=self.WaitForElementVisible((By.NAME,membership_agreement_name ))
+        membership_agreement=self.WaitForElementVisible(MEMBERSHIP_AGREEMENT_NAME )
         membership_agreement.click()
         #e-mail gönderim izni
-        sending_permission=self.WaitForElementVisible((By.NAME,sending_permission_name ))
+        sending_permission=self.WaitForElementVisible(SENDING_PERMISSION_NAME )
         sending_permission.click()
         #arama izni
-        search_permission=self.WaitForElementVisible((By.NAME,search_permission_name))
+        search_permission=self.WaitForElementVisible(SEARCH_PERMISSION_NAME)
         search_permission.click()       
-        telephone_number=self.WaitForElementVisible((By.ID,telephone_number_ıd))
-        telephone_number.send_keys(record_telephone_number)
+        telephone_number=self.WaitForElementVisible(TELEPHONE_NUMBER_ID)
+        telephone_number.send_keys(RECORD_TELEPHONE_NUMBER)
         #recaphcha
-        iframe = self.WaitForElementVisible((By.CSS_SELECTOR,iframe_selector ))
+        iframe = self.WaitForElementVisible(IFRAME_SELECTOR)
         self.driver.switch_to.frame(iframe)
         sleep(10)
-        captcha = self.WaitForElementVisible((By.CSS_SELECTOR, captcha_selector))
+        captcha = self.WaitForElementVisible(CAPTCHA_SELECTOR)
         captcha.click()
-        sleep(20)
         self.driver.switch_to.default_content()
         #devam et
-        continue_button =self.WaitForElementVisible((By.XPATH,continue_button_xpath)) 
+        continue_button =self.WaitForElementVisible(CONTINUE_BUTTON_SELECTOR) 
         continue_button.click()
         actions=ActionChains(self.driver)
         actions.move_to_element(continue_button).perform()
-        sleep(3)
-        message=self.WaitForElementVisible((By.CSS_SELECTOR, message_selector))
-        assert {message.text == "Tobeto Platform'a kaydiniz basariyla gerceklesti. Giris yapabilmek icin e-posta adresinize iletilen dogrulama linkine tiklayarak hesabinizi aktiflestirin."}
+        message=self.WaitForElementVisible(MESSAGE_SELECTOR)
+        assert {message.text == MESSAGE}
        
-     #E-postanın bos bırakılması durumu(CASE4)
+    #E-postanın bos bırakılması durumu(CASE4)
     def test_leaving_email_blank(self):                
-        email=self.WaitForElementVisible((By.NAME, email_name))
-        email.send_keys("pair1.tobetoo@gmail.com")
+        email=self.WaitForElementVisible(EMAIL_NAME)
+        email.send_keys(RECORDEMAIL)
         email.send_keys(Keys.CONTROL + 'a')
         email.send_keys(Keys.CONTROL + 'a')
         email.send_keys(Keys.DELETE)
-        alert_message=self.WaitForElementVisible((By.CSS_SELECTOR, alert_message_selector))
-        assert alert_message.text == "Doldurulması zorunlu alan*"
+        alert_message=self.WaitForElementVisible(ALERT_MESSAGE_SELECTOR)
+        assert alert_message.text == ALERT_MESSAGE
 
      #Gecersiz e-posta(CASE5)
     def test_invalid_email(self):
-        email=self.WaitForElementVisible((By.NAME, "email"))
-        email.send_keys("123")         
-        error_message=self.WaitForElementVisible((By.CSS_SELECTOR, error_message_selector))
-        assert error_message.text == "Geçersiz e-posta adresi*"
+        email=self.WaitForElementVisible(EMAIL_NAME)
+        email.send_keys(EMAIL)         
+        error_message=self.WaitForElementVisible(ERROR_MESSAGE_SELECTOR)
+        assert error_message.text == ERROR_MESSAGE
 
      #Şifre ve şifre takrarın örtüşmeme durumu(CASE6)
     def test_password_mismatch(self):
-        firstName = self.WaitForElementVisible((By.NAME,firstName_name))
-        lastName = self.WaitForElementVisible((By.NAME,lastName_name))
-        email=self.WaitForElementVisible((By.NAME,email_name))
-        password=self.WaitForElementVisible((By.NAME,password_name))
-        passwordAgain=self.WaitForElementVisible((By.NAME,passwordAgain_name))
-        firstName.send_keys("Gül")
-        lastName.send_keys("Karamahmutoğlu")
-        email.send_keys("pair.1ttobetoo@gmail.com")
-        password.send_keys("1234567")
-        passwordAgain.send_keys("123456")
+        firstName = self.WaitForElementVisible(FIRSTNAME_NAME)
+        lastName = self.WaitForElementVisible(LASTNAME_NAME)
+        email=self.WaitForElementVisible(EMAIL_NAME)
+        password=self.WaitForElementVisible(PASSWORD_NAME)
+        passwordAgain=self.WaitForElementVisible(PASSWORDAGAIN_NAME)
+        firstName.send_keys(RECORD_FIRSTNAME)
+        lastName.send_keys(RECORD_LASTNAME)
+        email.send_keys(RECORD_EMAIL)
+        password.send_keys(RECORD_PASSWORDD)
+        passwordAgain.send_keys(RECORD_PASSWORD_AGAIN)
         passwordAgain.click()
-        login_button=self.WaitForElementVisible((By.CSS_SELECTOR, login_button_selector))
+        login_button=self.WaitForElementVisible(LOGIN_BUTTON_SELECTOR)
         login_button.click()
         #açık rıza metni
-        consent_text=self.WaitForElementVisible((By.NAME,consent_text_name))
+        consent_text=self.WaitForElementVisible(CONSENT_TEXT_NAME)
         consent_text.click()
         #üyelik sözleşmesi
-        membership_agreement=self.WaitForElementVisible((By.NAME,membership_agreement_name))
+        membership_agreement=self.WaitForElementVisible(MEMBERSHIP_AGREEMENT_NAME)
         membership_agreement.click()
         #email gönderim izni
-        sending_permission=self.WaitForElementVisible((By.NAME,sending_permission_name))
+        sending_permission=self.WaitForElementVisible(SENDING_PERMISSION_NAME)
         sending_permission.click()
         #arama izni
-        search_permission=self.WaitForElementVisible((By.NAME,search_permission_name))
-        search_permission.click()
-         
-        telephone_number=self.WaitForElementVisible((By.ID, telephone_number_ıd))
-        telephone_number.send_keys("5544588254")
+        search_permission=self.WaitForElementVisible(SEARCH_PERMISSION_NAME)
+        search_permission.click()         
+        telephone_number=self.WaitForElementVisible(TELEPHONE_NUMBER_ID)
+        telephone_number.send_keys(RECORD_TELEPHONE_NUMBER)
         #recaphcha
-        iframe = self.WaitForElementVisible((By.CSS_SELECTOR,iframe_selector ))
+        iframe = self.WaitForElementVisible(IFRAME_SELECTOR)
         self.driver.switch_to.frame(iframe)
-        captcha = self.WaitForElementVisible((By.CSS_SELECTOR,captcha_selector ))
+        captcha = self.WaitForElementVisible(CAPTCHA_SELECTOR)
         captcha.click()
         sleep(30)
         self.driver.switch_to.default_content()
-        continue_button =self.WaitForElementVisible((By.XPATH,continue_button_xpath ))  #/html/body/div[4]/div/div/div/div/div/div[3]/button[2]  #BURASI KAYIT OL AŞAMASINDA KAYDOL BUTONUNA TIKLANILDAKTAN SONRA GELEN PENCERİNİN SONUNDAKİ DEVAM BUTONU
-        self.clickElementByJS(continue_button)
-        sleep(10)        
-        wait = WebDriverWait(self.driver, 10)
-        errorMessage=self.WaitForElementVisible((By.XPATH,errorMessage_xpath ))           
-        assert {errorMessage.text == "Şifreler eşleşmedi*", "Hata mesajı beklenmedik şekilde alındı."}
+        continue_button =self.WaitForElementVisible(CONTINUE_BUTTON_XPATH) 
+        self.clickElementByJS(continue_button)              
+        errorMessage=self.WaitForElementVisible(ERRORMESSAGE_XPATH)           
+        assert {errorMessage.text == ERRORMESSAGE}
 
       #"Kayit Ol"" butonunun pasif olarak goruntulenme durumu(CASE7)
     def test_passive_register_button(self):
-        firstName = self.WaitForElementVisible((By.NAME,firstName_name))
-        lastName = self.WaitForElementVisible((By.NAME,lastName_name))
-        email=self.WaitForElementVisible((By.NAME,email_name))
-        password=self.WaitForElementVisible((By.NAME,password_name))
-        passwordAgain=self.WaitForElementVisible((By.NAME,passwordAgain_name))
-        firstName.send_keys("")
-        lastName.send_keys("Karamahmutoğlu")
-        email.send_keys("pair1.tobetoo@gmail.com")
-        password.send_keys("1234567")
-        passwordAgain.send_keys("123456")
+        firstName = self.WaitForElementVisible(FIRSTNAME_NAME)
+        lastName = self.WaitForElementVisible(LASTNAME_NAME)
+        email=self.WaitForElementVisible(EMAIL_NAME)
+        password=self.WaitForElementVisible(PASSWORD_NAME)
+        passwordAgain=self.WaitForElementVisible(PASSWORDAGAIN_NAME)
+        firstName.send_keys(RECORDFIRSTNAME)
+        lastName.send_keys(RECORD_LASTNAME)
+        email.send_keys(RECORD_EMAIL)
+        password.send_keys(RECORD_PASSWORDD)
+        passwordAgain.send_keys(RECORD_PASSWORD_AGAIN)
         passwordAgain.click()
  
       #E-posta adresinin sistemde kayitli olma durumu (CASE8)
     def test_registered_email(self):
-        firstName = self.WaitForElementVisible((By.NAME,firstName_name))
-        lastName = self.WaitForElementVisible((By.NAME,lastName_name))
-        email=self.WaitForElementVisible((By.NAME,email_name))
-        password=self.WaitForElementVisible((By.NAME,password_name))
-        passwordAgain=self.WaitForElementVisible((By.NAME,passwordAgain_name))
-        firstName.send_keys("Gül")
-        lastName.send_keys("Karamahmutoğlu")
-        email.send_keys("pair1.tobetoo@gmail.com")
-        password.send_keys("123456")
-        passwordAgain.send_keys("123456")
+        firstName = self.WaitForElementVisible(FIRSTNAME_NAME)
+        lastName = self.WaitForElementVisible(LASTNAME_NAME)
+        email=self.WaitForElementVisible(EMAIL_NAME)
+        password=self.WaitForElementVisible(RECORD_PASSWORD)
+        passwordAgain=self.WaitForElementVisible(RECORD_PASSWORD_AGAIN)
+        firstName.send_keys(RECORD_FIRSTNAME)
+        lastName.send_keys(RECORD_LASTNAME)
+        email.send_keys(RECORD_EMAIL)
+        password.send_keys(RECORD_PASSWORD)
+        passwordAgain.send_keys(RECORD_PASSWORD_AGAIN)
         self.clickElementByJS(passwordAgain)
-        login_button=self.WaitForElementVisible((By.CSS_SELECTOR,login_button_selector))
+        login_button=self.WaitForElementVisible(LOGIN_BUTTON_SELECTOR)
         login_button.click()
         #açık rıza metni
-        consent_text=self.WaitForElementVisible((By.NAME,consent_text_name))
+        consent_text=self.WaitForElementVisible(CONSENT_TEXT_NAME)
         consent_text.click()
         #üyelik sözleşmesi
-        membership_agreement=self.WaitForElementVisible((By.NAME,membership_agreement_name))
+        membership_agreement=self.WaitForElementVisible(MEMBERSHIP_AGREEMENT_NAME)
         membership_agreement.click()
         #email gönderim izni
-        sending_permission=self.WaitForElementVisible((By.NAME,sending_permission_name))
+        sending_permission=self.WaitForElementVisible(SENDING_PERMISSION_NAME)
         sending_permission.click()
         #arama izni
-        search_permission=self.WaitForElementVisible((By.NAME,search_permission_name))
+        search_permission=self.WaitForElementVisible(SEARCH_PERMISSION_NAME)
         search_permission.click()
-        telephone_number=self.WaitForElementVisible((By.ID,telephone_number_ıd))
-        telephone_number.send_keys("554 458 82 54")
+        telephone_number=self.WaitForElementVisible(TELEPHONE_NUMBER_ID)
+        telephone_number.send_keys(RECORD_TELEPHONE_NUMBER)
         #recaptcha
-        iframe =self.WaitForElementVisible((By.CSS_SELECTOR,iframe_selector))
+        iframe =self.WaitForElementVisible(IFRAME_SELECTOR)
         self.driver.switch_to.frame(iframe)
-        captcha = self.WaitForElementVisible((By.CSS_SELECTOR,captcha_selector))
+        captcha = self.WaitForElementVisible(CAPTCHA_SELECTOR)
         captcha.click()
         sleep(20)
         self.driver.switch_to.default_content()
-        continue_button =self.WaitForElementVisible((By.XPATH,continue_button_xpath))  #//button[@class='btn btn-yes my-3']
+        continue_button =self.WaitForElementVisible(CONTINUE_BUTTON_XPATH)  
         continue_button.click()
-        sleep(15)
-        popup_message=self.WaitForElementVisible((By.XPATH, popup_message_xpath))
-        assert {popup_message.text == "Girdiginiz e-posta adresi ile kayitli uyelik bulunmaktadir"}
+        popup_message=self.WaitForElementVisible(POPUP_MESSAGE_XPATH)
+        assert {popup_message.text ==POPUP_MESSAGE }
 
      #"Devam Et" butonunun pasif olarak görüntülenme durumu (CASE9)
-    def test_passive_continue_button(self):  
-        
-        firstName = self.WaitForElementVisible((By.NAME,firstName_name))
-        lastName = self.WaitForElementVisible((By.NAME,lastName_name))
-        email=self.WaitForElementVisible((By.NAME,email_name))
-        password=self.WaitForElementVisible((By.NAME,password_name))
-        passwordAgain=self.WaitForElementVisible((By.NAME,passwordAgain_name))
-        firstName.send_keys("Gül")
-        lastName.send_keys("Karamahmutoğlu")
-        email.send_keys("pair1.tobetoo@gmail.com")
-        password.send_keys("123456")
-        passwordAgain.send_keys("123456")
+    def test_passive_continue_button(self):          
+        firstName = self.WaitForElementVisible(FIRSTNAME_NAME)
+        lastName = self.WaitForElementVisible(LASTNAME_NAME)
+        email=self.WaitForElementVisible(EMAIL_NAME)
+        password=self.WaitForElementVisible(PASSWORD_NAME)
+        passwordAgain=self.WaitForElementVisible(RECORD_PASSWORD_AGAIN)
+        firstName.send_keys(RECORD_FIRSTNAME)
+        lastName.send_keys(RECORD_LASTNAME)
+        email.send_keys(RECORDEMAIL)
+        password.send_keys(RECORD_PASSWORD)
+        passwordAgain.send_keys(RECORD_PASSWORD)
         passwordAgain.click()
-        login_button=self.WaitForElementVisible((By.CSS_SELECTOR,login_button_selector))
+        login_button=self.WaitForElementVisible(LOGIN_BUTTON_SELECTOR)
         login_button.click()
         #açık rıza metni
-        consent_text=self.WaitForElementVisible((By.NAME,consent_text_name))
+        consent_text=self.WaitForElementVisible(CONSENT_TEXT_NAME)
         consent_text.click()
         #üyelik sözleşmesi
-        membership_agreement=self.WaitForElementVisible((By.NAME,membership_agreement_name))
+        membership_agreement=self.WaitForElementVisible(MEMBERSHIP_AGREEMENT_NAME)
         membership_agreement.click()
         #email gönderim izni
-        sending_permission=self.WaitForElementVisible((By.XPATH,sending_permission_xpath))
+        sending_permission=self.WaitForElementVisible(SENDING_PERMISSION_NAME)
         self.clickElementByJS(sending_permission)
         #arama izni
-        search_permission=self.WaitForElementVisible((By.NAME,search_permission_name))
+        search_permission=self.WaitForElementVisible(SEARCH_PERMISSION_NAME)
         search_permission.click()
         #telefon kısmı boş bırakıldı
-        telephone_number=self.WaitForElementVisible((By.ID,telephone_number_ıd))
+        telephone_number=self.WaitForElementVisible(TELEPHONE_NUMBER_ID)
         telephone_number.send_keys("")
-        iframe = self.WaitForElementVisible((By.CSS_SELECTOR,iframe_selector))
+        iframe = self.WaitForElementVisible(IFRAME_SELECTOR)
         self.driver.switch_to.frame(iframe)
-        captcha = self.WaitForElementVisible((By.CSS_SELECTOR,captcha_selector))
+        captcha = self.WaitForElementVisible(CAPTCHA_SELECTOR)
         captcha.click()
         sleep(10)
         self.driver.switch_to.default_content()
-        continue_button =self.WaitForElementVisible((By.XPATH,continue_button_xpath))   
+        continue_button =self.WaitForElementVisible(CONTINUE_BUTTON_XPATH)   
         self.clickElementByJS(continue_button)
-        sleep(10)
+        
 
      #Telefon numarasinin karakter sayisinin az veya fazla girilmesi durumu(CASE10)
     def test_phone_character(self):        
-        firstName = self.WaitForElementVisible((By.NAME,firstName_name))
-        lastName = self.WaitForElementVisible((By.NAME,lastName_name))
-        email=self.WaitForElementVisible((By.NAME,email_name))
-        password=self.WaitForElementVisible((By.NAME,password_name))
-        passwordAgain=self.WaitForElementVisible((By.NAME,passwordAgain_name))
-        firstName.send_keys("Gül")
-        lastName.send_keys("Karamahmutoğlu")
-        email.send_keys("pair1.tobetoo@gmail.com")
-        password.send_keys("123456")
-        passwordAgain.send_keys("123456")
+        firstName = self.WaitForElementVisible(FIRSTNAME_NAME)
+        lastName = self.WaitForElementVisible(LASTNAME_NAME)
+        email=self.WaitForElementVisible(EMAIL_NAME)
+        password=self.WaitForElementVisible(PASSWORD_NAME)
+        passwordAgain=self.WaitForElementVisible(PASSWORDAGAIN_NAME)
+        firstName.send_keys(RECORD_FIRSTNAME)
+        lastName.send_keys(RECORD_LASTNAME)
+        email.send_keys(RECORDEMAIL)
+        password.send_keys(RECORD_PASSWORD)
+        passwordAgain.send_keys(RECORD_PASSWORD_AGAIN)
         passwordAgain.click()
-        login_button=self.WaitForElementVisible((By.CSS_SELECTOR,login_button_selector))
+        login_button=self.WaitForElementVisible(LOGIN_BUTTON_SELECTOR)
         self.clickElementByJS(login_button)
         #açık rıza metni
-        consent_text=self.WaitForElementVisible((By.NAME,consent_text_name))
+        consent_text=self.WaitForElementVisible(CONSENT_TEXT_NAME)
         consent_text.click()
         #üyelik sözleşmesi
-        membership_agreement=self.WaitForElementVisible((By.NAME,membership_agreement_name))
+        membership_agreement=self.WaitForElementVisible(MEMBERSHIP_AGREEMENT_NAME)
         membership_agreement.click()
         #email gönderim izni
-        sending_permission=self.WaitForElementVisible((By.XPATH,sending_permission_xpath))
+        sending_permission=self.WaitForElementVisible(SENDING_PERMISSION_NAME)
         self.clickElementByJS(sending_permission)
         #arama izni
-        search_permission=self.WaitForElementVisible((By.NAME,search_permission_name))
+        search_permission=self.WaitForElementVisible(SEARCH_PERMISSION_NAME)
         search_permission.click()      
-        telephone_number=self.WaitForElementVisible((By.ID, telephone_number_ıd))
-        telephone_number.send_keys("573 984 14 22 6")       
+        telephone_number=self.WaitForElementVisible(TELEPHONE_NUMBER_ID)
+        telephone_number.send_keys(TELEPHONE_NUMBERR)       
         telephone_number.send_keys(Keys.CONTROL + 'a')
         telephone_number.send_keys(Keys.DELETE) 
-        telephone_number.send_keys("573 984 14 2")   
-        iframe = self.WaitForElementVisible((By.CSS_SELECTOR,iframe_selector))
+        telephone_number.send_keys(TELEPHONENUMBER)   
+        iframe = self.WaitForElementVisible(IFRAME_SELECTOR)
         self.driver.switch_to.frame(iframe)
-        captcha = self.WaitForElementVisible((By.CSS_SELECTOR,captcha_selector))
+        captcha = self.WaitForElementVisible(CAPTCHA_SELECTOR)
         captcha.click()
         sleep(10)
         self.driver.switch_to.default_content()
-        continue_button =self.WaitForElementVisible((By.XPATH,continue_button_xpath))   #/html/body/div[4]/div/div/div/div/div/div[3]/button[2]  #BURASI KAYIT OL AŞAMASINDA KAYDOL BUTONUNA TIKLANILDAKTAN SONRA GELEN PENCERİNİN SONUNDAKİ DEVAM BUTONU
+        continue_button =self.WaitForElementVisible(CONTINUE_BUTTON_XPATH)   
         self.clickElementByJS(continue_button)
-        sleep(10)
-
-       
+        actions=ActionChains(self.driver)
+        actions.move_to_element(continue_button).perform()      
+        alerttMessage=self.WaitForElementVisible(ALERTTMESSAGESELECTOR)
+        alertt_message=self.WaitForElementVisible(ALERTT_MESSAGE_XPATH)
+        assert {alerttMessage.text == ALERTTMESSAGE and alertt_message.text == ALERTT_MESSAGE }         
+        
+      
       #Telefon numarasının sistemde kayıtlı olma durumu(CASE11-Bug)
-    def test_phone_register(self):  
-            
-        firstName = self.WaitForElementVisible((By.NAME,firstName_name))
-        lastName = self.WaitForElementVisible((By.NAME,lastName_name))
-        email=self.WaitForElementVisible((By.NAME,email_name))
-        password=self.WaitForElementVisible((By.NAME,password_name))
-        passwordAgain=self.WaitForElementVisible((By.NAME,passwordAgain_name))
-        firstName.send_keys("Gül")
-        lastName.send_keys("Karamahmutoğlu")
-        email.send_keys("pair1.tobetoo@gmail.com")
-        password.send_keys("123456")
-        passwordAgain.send_keys("123456")
+    def test_phone_register(self):              
+        firstName = self.WaitForElementVisible(FIRSTNAME_NAME)
+        lastName = self.WaitForElementVisible(LASTNAME_NAME)
+        email=self.WaitForElementVisible(EMAIL_NAME)
+        password=self.WaitForElementVisible(PASSWORD_NAME)
+        passwordAgain=self.WaitForElementVisible(PASSWORDAGAIN_NAME)
+        firstName.send_keys(RECORD_FIRSTNAME)
+        lastName.send_keys(RECORD_LASTNAME)
+        email.send_keys(RECORDEMAIL)
+        password.send_keys(RECORD_PASSWORD)
+        passwordAgain.send_keys(RECORD_PASSWORD_AGAIN)
         passwordAgain.click()
-        login_button=self.WaitForElementVisible((By.CSS_SELECTOR,login_button_selector))
+        login_button=self.WaitForElementVisible(LOGIN_BUTTON_SELECTOR)
         self.clickElementByJS(login_button)
         #açık rıza metni
-        consent_text=self.WaitForElementVisible((By.NAME,consent_text_name))
+        consent_text=self.WaitForElementVisible(CONSENT_TEXT_NAME)
         consent_text.click()
         #üyelik sözleşmesi
-        membership_agreement=self.WaitForElementVisible((By.NAME,membership_agreement_name))
+        membership_agreement=self.WaitForElementVisible(MEMBERSHIP_AGREEMENT_NAME)
         membership_agreement.click()
         #email gönderim izni
-        sending_permission=self.WaitForElementVisible((By.NAME,sending_permission_name))
+        sending_permission=self.WaitForElementVisible(SENDING_PERMISSION_NAME)
         sending_permission.click()
         #arama izni
-        search_permission=self.WaitForElementVisible((By.NAME,search_permission_name))
+        search_permission=self.WaitForElementVisible(SEARCH_PERMISSION_NAME)
         search_permission.click()
-        telephone_number=self.WaitForElementVisible((By.ID,telephone_number_ıd))
-        telephone_number.send_keys("505 442 40 86 ")         
-        iframe = self.WaitForElementVisible((By.CSS_SELECTOR,iframe_selector))
+        telephone_number=self.WaitForElementVisible(TELEPHONE_NUMBER_ID)
+        telephone_number.send_keys(TELEPHONENUMBERR)         
+        iframe = self.WaitForElementVisible(IFRAME_SELECTOR)
         self.driver.switch_to.frame(iframe)
-        captcha = self.WaitForElementVisible((By.CSS_SELECTOR,captcha_selector))
+        captcha = self.WaitForElementVisible(CAPTCHA_SELECTOR)
         captcha.click()
         sleep(10)
         self.driver.switch_to.default_content()
-        continue_button =self.WaitForElementVisible((By.XPATH,continue_button_xpath))  
+        continue_button =self.WaitForElementVisible(CONTINUE_BUTTON_XPATH)  
         self.clickElementByJS(continue_button)
-        alert_text=self.WaitForElementVisible((By.XPATH, alert_text_xpath))        
-        assert alert_text.text ==  "Girdiginiz telefon numarasi ile kayitli uyelik bulunmaktadir."
+        actions=ActionChains(self.driver)
+        actions.move_to_element(continue_button).perform() 
+        alert_text=self.WaitForElementVisible(POPUP_XPATH)        
+        assert alert_text.text == ALERT_TEXT
         alert_text = None
           
 
      # Sifre karakter sayisi durumu (CASE12)  
     def test_password_characters(self):     
-        record_firstName = self.WaitForElementVisible((By.NAME,firstName_name))
-        record_lastName = self.WaitForElementVisible((By.NAME,lastName_name))
-        record_email=self.WaitForElementVisible((By.NAME,email_name))
-        record_password=self.WaitForElementVisible((By.NAME,password_name))
-        record_passwordAgain=self.WaitForElementVisible((By.NAME,passwordAgain_name))
-        record_firstName.send_keys("Gül")
-        record_lastName.send_keys("Karamahmutoğlu")
-        record_email.send_keys("pair1.tobetoo@gmail.com")
+        record_firstName = self.WaitForElementVisible(FIRSTNAME_NAME)
+        record_lastName = self.WaitForElementVisible(LASTNAME_NAME)
+        record_email=self.WaitForElementVisible(EMAIL_NAME)
+        record_password=self.WaitForElementVisible(PASSWORD_NAME)
+        record_passwordAgain=self.WaitForElementVisible(PASSWORDAGAIN_NAME)
+        record_firstName.send_keys(RECORD_FIRSTNAME)
+        record_lastName.send_keys(RECORD_LASTNAME)
+        record_email.send_keys(RECORD_EMAIL)
         record_password.send_keys("456789")
         record_passwordAgain.send_keys("456789")
         record_passwordAgain.click()
-        login_button=self.WaitForElementVisible((By.CSS_SELECTOR, login_button_selector))
+        login_button=self.WaitForElementVisible(LOGIN_BUTTON_SELECTOR)
         login_button.click()
         #açık rıza metni
-        consent_text=self.WaitForElementVisible((By.NAME, consent_text_name))
+        consent_text=self.WaitForElementVisible(CONSENT_TEXT_NAME)
         consent_text.click()
         #üyelik sözleşmesi
-        membership_agreement=self.WaitForElementVisible((By.NAME,membership_agreement_name ))
+        membership_agreement=self.WaitForElementVisible(MEMBERSHIP_AGREEMENT_NAME)
         membership_agreement.click()
         #e-mail gönderim izni
-        sending_permission=self.WaitForElementVisible((By.NAME,sending_permission_name ))
+        sending_permission=self.WaitForElementVisible(SENDING_PERMISSION_NAME)
         sending_permission.click()
         #arama izni
-        search_permission=self.WaitForElementVisible((By.NAME,search_permission_name))
+        search_permission=self.WaitForElementVisible(SEARCH_PERMISSION_NAME)
         search_permission.click()
-        telephone_number=self.WaitForElementVisible((By.ID,telephone_number_ıd))
-        telephone_number.send_keys("554 458 82 54")
+        telephone_number=self.WaitForElementVisible(TELEPHONE_NUMBER_ID)
+        telephone_number.send_keys(RECORD_TELEPHONE_NUMBER)
         #recaphcha        
-        iframe = self.WaitForElementVisible((By.CSS_SELECTOR,iframe_selector))
+        iframe = self.WaitForElementVisible(IFRAME_SELECTOR)
         self.driver.switch_to.frame(iframe)
-        captcha = self.WaitForElementVisible((By.CSS_SELECTOR,captcha_selector))
+        captcha = self.WaitForElementVisible(CAPTCHA_SELECTOR)
         captcha.click()
         sleep(10)
         self.driver.switch_to.default_content()
         #devam et
-        continue_button =self.WaitForElementVisible((By.XPATH,continue_button_xpath))  
+        continue_button =self.WaitForElementVisible(CONTINUE_BUTTON_XPATH)  
         self.clickElementByJS(continue_button)
-        sleep(3)
-        popUp_message=self.WaitForElementVisible((By.XPATH,popUp_message_xpath))
-        assert {popUp_message.text == "Sifreniz en az 6 karakterden olusmalidir"}
+        actions=ActionChains(self.driver)
+        actions.move_to_element(continue_button).perform() 
+        popUp_message=self.WaitForElementVisible(POPUP_XPATH)
+        assert {popUp_message.text == ALERT_TEXT}
 
        
     
@@ -376,8 +374,6 @@ class Test_Tobeto_Record:
     
     
 
-"""testclass = Test_Tobeto_Record()
-testclass.test_record()"""
 
 
         
