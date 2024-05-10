@@ -1,1 +1,0 @@
-# Tobeto-Proje-Pair1
