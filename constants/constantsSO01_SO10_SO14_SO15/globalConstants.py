@@ -1,29 +1,29 @@
 from selenium.webdriver.common.by import By
 #Kayıt ol case1
 BASE_URL="https://tobeto.com/kayit-ol"
-FIRSTNAME_NAME = (By.NAME,"firstName")
-LASTNAME_NAME = (By.NAME,"lastName")
-EMAIL_NAME = (By.NAME,"email")
-PASSWORD_NAME = (By.NAME,"password")
-PASSWORDAGAIN_NAME = (By.NAME,"passwordAgain")
-RECORD_FIRSTNAME = "Gül"
-RECORDFIRSTNAME = ""
-RECORD_LASTNAME ="Karamahmutoğlu"
-RECORD_EMAIL ="pair.1ttobetoo@gmail.com"
+FIRSTNAME_NAME=(By.NAME,"firstName")
+LASTNAME_NAME=(By.NAME,"lastName")
+EMAIL_NAME=(By.NAME,"email")
+PASSWORD_NAME=(By.NAME,"password")
+PASSWORDAGAIN_NAME= (By.NAME,"passwordAgain")
+RECORD_FIRSTNAME="Gül"
+RECORDFIRSTNAME=""
+RECORD_LASTNAME="Karamahmutoğlu"
+RECORD_EMAIL="pair.1ttobetoo@gmail.com"
 RECORD_PASSWORD="123456"
 RECORD_PASSWORDD="1234567"
 RECORD_PASSWORD_AGAIN="123456"
 RECORD_TELEPHONE_NUMBER="5545553322"
-LOGIN_BUTTON_SELECTOR= (By.CSS_SELECTOR,".btn:nth-child(3)")
-CONSENT_TEXT_NAME= (By.NAME,"contact")
-MEMBERSHIP_AGREEMENT_NAME= (By.NAME,"membershipContrat")
-SENDING_PERMISSION_NAME= (By.NAME,"emailConfirmation")
-SEARCH_PERMISSION_NAME= (By.NAME,"phoneConfirmation")
-TELEPHONE_NUMBER_ID=  (By.ID,"phoneNumber")
-IFRAME_SELECTOR= (By.CSS_SELECTOR,"iframe[src^='https://www.google.com/recaptcha/api2/anchor']")
-CAPTCHA_SELECTOR= (By.CSS_SELECTOR,"span#recaptcha-anchor")
-CONTINUE_BUTTON_SELECTOR= (By.CSS_SELECTOR,"body > div.fade.alert-modal.modal.show > div > div > div > div > div > div.alert-buttons > button.btn.btn-yes.my-3")
-MESSAGE_SELECTOR= (By.CSS_SELECTOR,"#__next > div > main > section > div > div > div > div > span")
+LOGIN_BUTTON_SELECTOR=(By.CSS_SELECTOR,".btn:nth-child(3)")
+CONSENT_TEXT_NAME=(By.NAME,"contact")
+MEMBERSHIP_AGREEMENT_NAME=(By.NAME,"membershipContrat")
+SENDING_PERMISSION_NAME=(By.NAME,"emailConfirmation")
+SEARCH_PERMISSION_NAME=(By.NAME,"phoneConfirmation")
+TELEPHONE_NUMBER_ID=(By.ID,"phoneNumber")
+IFRAME_SELECTOR=(By.CSS_SELECTOR,"iframe[src^='https://www.google.com/recaptcha/api2/anchor']")
+CAPTCHA_SELECTOR=(By.CSS_SELECTOR,"span#recaptcha-anchor")
+CONTINUE_BUTTON_SELECTOR=(By.CSS_SELECTOR,"body > div.fade.alert-modal.modal.show > div > div > div > div > div > div.alert-buttons > button.btn.btn-yes.my-3")
+MESSAGE_SELECTOR=(By.CSS_SELECTOR,"#__next > div > main > section > div > div > div > div > span")
 MESSAGE="Tobeto Platform'a kaydiniz basariyla gerceklesti. Giris yapabilmek icin e-posta adresinize iletilen dogrulama linkine tiklayarak hesabinizi aktiflestirin."
 
 

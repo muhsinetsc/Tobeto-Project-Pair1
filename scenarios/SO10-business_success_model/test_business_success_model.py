@@ -5,7 +5,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.wait import WebDriverWait
-from constants.constantsS01_10_14_15.globalConstants import *
+from constants.constantsSO01_SO10_SO14_SO15.globalConstants import *
 import pytest
 
 options = Options()
