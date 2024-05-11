@@ -1,6 +1,7 @@
 import pytest
 from time import sleep
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from constants.constants_SO02_SO03_SO13.globalContants import *
@@ -11,7 +12,7 @@ class Test_My_Education_Life():
     def setup(self):
         self.driver = webdriver.Chrome()
         self.driver.maximize_window()
-        self.driver.get("https://tobeto.com/giris")
+        self.driver.get(BASE_URL)
         yield
         self.driver.quit()
 
@@ -19,22 +20,22 @@ class Test_My_Education_Life():
         return WebDriverWait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
     def Pre_Contidion(self):
         sleep(5)
-        email = self.waitForElementVisible((By.NAME, "email"))
+        email = self.waitForElementVisible(E_MAIL_XPATH)
         sleep(5)
-        email.send_keys("pair1tobeto@gmail.com")
-        password = self.waitForElementVisible((By.NAME, "password"))
+        email.send_keys(E_MAIL_ADDRESS)
+        password = self.waitForElementVisible(PASSWORD_XPATH)
         sleep(5)
-        password.send_keys("123456")
-        loginButton = self.waitForElementVisible((By.XPATH, '//*[@id="__next"]/div/main/section/div/div/div/div/form/button'))
+        password.send_keys(PASSWORD_ONE)
+        loginButton = self.waitForElementVisible(LOGINBUTTON_XPATH)
         sleep(5)
         loginButton.click()
-        profileButton = self.waitForElementVisible((By.XPATH, '//*[@id="__next"]/div/nav/div[1]/ul/li[2]/a'))
+        profileButton = self.waitForElementVisible(PROFIL_BUTTON_XPATH)
         sleep(5)
         profileButton.click()
-        edit_icon = self.waitForElementVisible((By.XPATH,'//*[@id="__next"]/div/main/div/div[1]/div/span'))
+        edit_icon = self.waitForElementVisible(EDIT_ICON_XPATH)
         sleep(5)
         edit_icon.click()
-        my_education_button = self.waitForElementVisible((By.XPATH, '//*[@id="__next"]/div/main/section/div/div/div[1]/div/a[3]'))
+        my_education_button = self.waitForElementVisible(MY_EDUCATION_XPATH)
         sleep(5)
         my_education_button.click()
         return
@@ -42,96 +43,179 @@ class Test_My_Education_Life():
         sleep(5)
         self.Pre_Contidion()
         sleep(5)
-        educationalBackground = self.waitForElementVisible((By.XPATH,'//*[@id="__next"]/div/main/section/div/div/div[2]/form/div/div[1]/select'))
+        educationalBackground = self.waitForElementVisible(EDUCATION_BACKGROUND_XPATH)
         sleep(3)
         educationalBackground.click()
         sleep(5)
-        educationalBackgroundTwo = self.waitForElementVisible((By.XPATH,'//*[@id="__next"]/div/main/section/div/div/div[2]/form/div/div[1]/select/option[2]'))
+        educationalBackgroundTwo = self.waitForElementVisible(EDUCATION_BACKGROUND_TWO_XPATH)
         sleep(3)
         educationalBackgroundTwo.click()
         sleep(5)
-        university = self.waitForElementVisible((By.XPATH,'//*[@id="__next"]/div/main/section/div/div/div[2]/form/div/div[2]/input'))
+        university = self.waitForElementVisible(UNIVERSITY_XPATH)
         sleep(3)
-        university.send_keys("cc")
+        university.send_keys(UNIVERSITY_TEXT)
         sleep(5)
-        department = self.waitForElementVisible((By.XPATH, '//*[@id="__next"]/div/main/section/div/div/div[2]/form/div/div[3]/input'))
+        department = self.waitForElementVisible(DEPARTMENT_XPATH)
         sleep(3)
-        department.send_keys("cc")
+        department.send_keys(DEPARTMENT_TEXT)
         sleep(5)
-        startingYear = self.waitForElementVisible((By.XPATH, '//*[@id="__next"]/div/main/section/div/div/div[2]/form/div/div[4]/div[1]/div/input')).click()
+        startingYear = self.waitForElementVisible(STARTING_YEAR_XPATH).click()
         sleep(3)
-        startingYearTwo = self.waitForElementVisible((By.XPATH, '//*[@id="__next"]/div/main/section/div/div/div[2]/form/div/div[4]/div[2]/div[2]/div/div/div[2]/div[2]/div/div[2]'))
-        sleep(3)
+        startingYearTwo = self.waitForElementVisible(STARTING_YEAR_TWO_XPATH)
         startingYearTwo.click()
         sleep(5)
-        graduationYear = self.waitForElementVisible((By.XPATH,'//*[@id="__next"]/div/main/section/div/div/div[2]/form/div/div[5]/div[1]/div/input')).click()
+        graduationYear = self.waitForElementVisible(GRADUATION_YEAR_XPATH).click()
         sleep(3)
-        graduationYearTwo = self.waitForElementVisible((By.XPATH, '//*[@id="__next"]/div/main/section/div/div/div[2]/form/div/div[5]/div[2]/div[2]/div/div/div[2]/div[2]/div/div[6]'))
+        graduationYearTwo = self.waitForElementVisible(GRADUATION_YEAR_TWO_XPATH)
         sleep(3)
         graduationYearTwo.click()
         sleep(5)
-        saveButton = self.waitForElementVisible((By.XPATH, '//*[@id="__next"]/div/main/section/div/div/div[2]/form/button'))
+        saveButton = self.waitForElementVisible(SAVE_BUTTON_XPATH)
         sleep(5)
         saveButton.click()
         sleep(3)
-        educationAllert = self.waitForElementVisible((By.XPATH, "//div[@id='__next']//div[@role='alert']/div[@class='toast-body']"))
+        educationAllert = self.waitForElementVisible(EDUCATION_ALERT_XPATH)
+        sleep(2)
+        assert educationAllert.text == EDUCATION_ALERT_TEXT
         sleep(3)
-        assert True
-        #assert educationAllert.text == "• Egitim bilgisi eklendi."
+        deleteButton = self.waitForElementVisible(DELETE_BUTTON_XPATH)
+        sleep(5)
+        deleteButton.click()
         sleep(3)
-        #deleteButton = self.waitForElementVisible((By.XPATH,'//*[@id="__next"]/div/main/section/div/div/div[2]/div/div/div[2]/span'))
-        #sleep(5)
-        #deleteButton.click()
-        #sleep(3)
-        #educationAllertTwo = self.waitForElementVisible((By.XPATH, '//div[@id="__next"]//div[@role="alert"]/div[@class="toast-body"]'))
-        #assert educationAllertTwo.text == "Secilen egitimi silmek istediginize emin misiniz?"
-        #yesButton = self.waitForElementVisible((By.XPATH,'/html/body/div[3]/div/div/div/div/div/div[2]/button[2]'))
-        #yesButton.click()
-        #educationAllertThree = self.waitForElementVisible((By.XPATH,'//div[@id="__next"]//div[@role="alert"]/div[@class="toast-body"]'))
-        #assert educationAllertThree.text == "Egitim kaldirildi."
+        educationAllertTwo = self.waitForElementVisible(EDUCATION_ALERT_TWO_XPATH)
+        sleep(2)
+        assert educationAllertTwo.text == EDUCATION_ALERT_TWO_TEXT
+        sleep(3)
+        yesButton = self.waitForElementVisible(YES_BUTTON_XPATH)
+        sleep(3)
+        yesButton.click()
+        sleep(3)
+        educationAllertThree = self.waitForElementVisible(EDUCATION_ALERT_THREE_XPATH)
+        sleep(2)
+        assert educationAllertThree.text == EDUCATION_ALERT_THREE_TEXT
 
     def test_continuingEducation(self):
         self.Pre_Contidion()
-        educationalBackground = self.waitForElementVisible((By.XPATH, '//*[@id="__next"]/div/main/section/div/div/div[2]/form/div/div[1]/select'))
+        sleep(5)
+        educationalBackground = self.waitForElementVisible(EDUCATION_BACKGROUND_XPATH)
+        sleep(3)
         educationalBackground.click()
-        educationalBackgroundTwo = self.waitForElementVisible((By.XPATH, '//*[@id="__next"]/div/main/section/div/div/div[2]/form/div/div[1]/select/option[2]'))
+        sleep(5)
+        educationalBackgroundTwo = self.waitForElementVisible(EDUCATION_BACKGROUND_TWO_XPATH)
+        sleep(3)
         educationalBackgroundTwo.click()
-        university = self.waitForElementVisible((By.XPATH, '//*[@id="__next"]/div/main/section/div/div/div[2]/form/div/div[2]/input)'))
-        university.send_keys("cc")
-        department = self.waitForElementVisible((By.XPATH, '//*[@id="__next"]/div/main/section/div/div/div[2]/form/div/div[3]/input'))
-        department.send_keys("cc")
-        startingYear = self.waitForElementVisible((By.XPATH, '//*[@id="__next"]/div/main/section/div/div/div[2]/form/div/div[4]/div/div/input)'))
-        startingYear.click()
-        startingYearTwo = self.waitForElementVisible((By.XPATH, '//*[@id="__next"]/div/main/section/div/div/div[2]/form/div/div[4]/div/div/input'))
-        startingYearTwo.send_keys("2018")
-        continueBox = self.waitForElementVisible((By.XPATH,'//*[@id="__next"]/div/main/section/div/div/div[2]/form/div/div[5]/label[2]'))
-        continueBox.click()
-        saveButton = self.waitForElementVisible((By.XPATH, '//*[@id="__next"]/div/main/section/div/div/div[2]/form/button'))
+        sleep(5)
+        university = self.waitForElementVisible(UNIVERSITY_XPATH)
+        sleep(3)
+        university.send_keys(UNIVERSITY_TEXT)
+        sleep(5)
+        department = self.waitForElementVisible(DEPARTMENT_XPATH)
+        sleep(3)
+        department.send_keys(DEPARTMENT_TEXT)
+        sleep(5)
+        startingYear = self.waitForElementVisible(STARTING_YEAR_XPATH).click()
+        sleep(3)
+        startingYearTwo = self.waitForElementVisible(STARTING_YEAR_TWO_XPATH)
+        sleep(3)
+        startingYearTwo.click()
+        sleep(5)
+        graduationYear = self.waitForElementVisible(GRADUATION_YEAR_XPATH).click()
+        sleep(3)
+        graduationYearTwo = self.waitForElementVisible(GRADUATION_YEAR_TWO_XPATH)
+        sleep(3)
+        graduationYearTwo.click()
+        sleep(5)
+        saveButton = self.waitForElementVisible(SAVE_BUTTON_XPATH)
+        sleep(5)
         saveButton.click()
-        educationAllertTwo = self.waitForElementVisible((By.XPATH, '//div[@id="__next"]//div[@role="alert"]/div[@class="toast-body"]'))
-        assert educationAllertTwo.text == "Egitim bilgisi eklendi"
+        sleep(3)
+        educationAllert = self.waitForElementVisible(EDUCATION_ALERT_XPATH)
+        sleep(3)
+        assert educationAllert.text == EDUCATION_ALERT_FIVE_TEXT
+        sleep(3)
+
 
     def test_requiredFieldTwo(self):
-        saveButton = self.waitForElementVisible((By.XPATH, '//*[@id="__next"]/div/main/section/div/div/div[2]/form/button'))
+        self.Pre_Contidion()
+        sleep(3)
+        saveButton = self.waitForElementVisible(SAVE_BUTTON_XPATH)
+        sleep(3)
         saveButton.click()
-        educationalBackgroundAllert = self.waitForElementVisible((By.XPATH,'//*[@id="__next"]/div/main/section/div/div/div[2]/form/div/div[1]/span/font/font'))
-        assert educationalBackgroundAllert.text == "Doldurulması zorunlu alan*"
-        universityAllert = self.waitForElementVisible((By.XPATH,'//*[@id="__next"]/div/main/section/div/div/div[2]/form/div/div[2]/span/font/font'))
-        assert universityAllert.text == "Doldurulması zorunlu alan*"
-        departmentAllert = self.waitForElementVisible((By.XPATH,'//*[@id="__next"]/div/main/section/div/div/div[2]/form/div/div[3]/span/font/font'))
-        assert departmentAllert.text == "Doldurulması zorunlu alan*"
-        startingYearAllert = self.waitForElementVisible((By.XPATH,'//*[@id="__next"]/div/main/section/div/div/div[2]/form/div/div[4]/span/font/font'))
-        assert startingYearAllert.text == "Doldurulması zorunlu alan*"
-        graduationYearAllert = self.waitForElementVisible((By.XPATH,'//*[@id="__next"]/div/main/section/div/div/div[2]/form/div/div[5]/span[1]/font/font'))
-        assert graduationYearAllert.text == "Doldurulması zorunlu alan*"
-        continueBoxAllert = self.waitForElementVisible((By.XPATH,'//*[@id="__next"]/div/main/section/div/div/div[2]/form/div/div[5]/span[2]/font/font'))
-        assert continueBoxAllert.text == "Doldurulması zorunlu alan*"
+        sleep(3)
+        educationalBackgroundAllert = self.waitForElementVisible(EDUCATION_BACKGROUND_ALLERT_XPATH)
+        sleep(3)
+        assert educationalBackgroundAllert.text == EDUCATION_ALERT_REQUIRED_TEXT
+        sleep(3)
+        universityAllert = self.waitForElementVisible(UNIVERSITY_ALLERT_XPATH)
+        sleep(3)
+        assert universityAllert.text == UNIVERSITY_ALLERT_TEXT
+        sleep(3)
+        departmentAllert = self.waitForElementVisible(DEPARTMENT_ALLERT_TEXT)
+        sleep(3)
+        assert departmentAllert.text == DEPARTMENT_ALLERT_TEXT
+        sleep(3)
+        startingYearAllert = self.waitForElementVisible(STARTING_YEAR_ALLERT_XPATH)
+        sleep(3)
+        assert startingYearAllert.text == STARTING_YEAR_ALLERT_TEXT
+        sleep(3)
+        graduationYearAllert = self.waitForElementVisible(GRADUATION_YEAR_ALLERT_XPATH)
+        sleep(3)
+        assert graduationYearAllert.text == GRADUATION_YEAR_ALLERT_TEXT
+        sleep(3)
+        continueBoxAllert = self.waitForElementVisible(CONTINUEBOX_ALLERT_XPATH)
+        sleep(3)
+        assert continueBoxAllert.text == CONTINUEBOX_ALLERT_TEXT
+        sleep(3)
 
 
+    def test_education_two_characters(self):
+        self.Pre_Contidion()
+        sleep(3)
+        university_two = self.waitForElementVisible(UNIVERSITY_TWO_XPATH)
+        sleep(3)
+        university_two.send_keys(UNIVERSITY_TWO_TEXT)
+        sleep(3)
+        department_two = self.waitForElementVisible(DEPARTMENT_TWO_XPATH)
+        sleep(3)
+        department_two.send_keys(DEPARTMENT_TWO_TEXT)
+        sleep(3)
+        save_button_two = self.waitForElementVisible(SAVE_BUTTON_TWO_XPATH)
+        sleep(3)
+        save_button_two.click()
+        sleep(3)
+        two_characters_alllert = self.waitForElementVisible(TWO_CHARACTERS_ALLERT_XPATH)
+        sleep(5)
+        assert two_characters_alllert.text == TWO_CHARACTERS_ALLERT_TEXT
+        sleep(5)
+        two_characters_alllert_two = self.waitForElementVisible(TWO_CHARACTERS_ALLERT_TWO_XPATH)
+        sleep(5)
+        assert two_characters_alllert_two == TWO_CHARACTERS_ALLERT_TWO_TEXT
+        sleep(5)
+        assert True
 
-
-
-
+    def test_education_fifty_characters(self):
+        self.Pre_Contidion()
+        sleep(3)
+        university_two = self.waitForElementVisible(UNIVERSITY_TWO_XPATH)
+        sleep(3)
+        university_two.send_keys(UNIVERSITY_TWO_FIFTY_TEXT)
+        sleep(3)
+        department_two = self.waitForElementVisible(DEPARTMENT_TWO_XPATH)
+        sleep(3)
+        department_two.send_keys(DEPARTMENT_TWO_FIFTY_TEXT)
+        sleep(3)
+        save_button_two = self.waitForElementVisible(SAVE_BUTTON_XPATH)
+        sleep(3)
+        save_button_two.click()
+        sleep(3)
+        fifty_characters_allert = self.waitForElementVisible(FIFTY_CHARACTERS_ALLERT_XPATH)
+        sleep(3)
+        assert fifty_characters_allert == FIFTY_CHARACTERS_ALLERT_TEXT
+        sleep(3)
+        fifty_characters_allert_two = self.waitForElementVisible(FIFTY_CHARACTERS_ALLERT_TWO_XPATH)
+        sleep(3)
+        assert fifty_characters_allert_two == FIFTY_CHARACTERS_ALLERT_TWO_TEXT
+        sleep(3)
 
 
 
