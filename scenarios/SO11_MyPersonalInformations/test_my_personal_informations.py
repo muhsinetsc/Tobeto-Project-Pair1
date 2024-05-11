@@ -183,7 +183,7 @@ class Test_Case1:
         sleep(3)
         self.driver.execute_script("window.scrollTo(0,750)")
         sleep(3)
-        neighbourhood_too_many_characters = self.WaitForElementVisible((By.XPATH,NEİGHBOURHOOD_TOO_MANY_CHARACTERS_XPATH))
+        neighbourhood_too_many_characters = self.WaitForElementVisible((By.XPATH,NEIGHBOURHOOD_TOO_MANY_CHARACTERS_XPATH))
         neighbourhood_too_many_characters.send_keys("111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111")
         sleep(5)
         pop_up_mesaj2_too_many_characters = self.WaitForElementVisible((By.XPATH,POP_UP_MESAJ2_TOO_MANY_CHARACTERS_XPATH))

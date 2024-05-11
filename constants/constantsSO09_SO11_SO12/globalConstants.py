@@ -197,7 +197,7 @@ SAVE_TOO_MANY_CHARACTERS_XPATH = "//*[@id='__next']/div/main/section/div/div/div
 COUNTRY_TOO_MANY_CHARACTERS_XPATH = "//*[@id='__next']/div/main/section/div/div/div[2]/form/div/div[8]/input"
 POP_UP_MESAJ1_TOO_MANY_CHARACTE_XPATH = "//*[@id='__next']/div/main/section/div/div/div[2]/form/div/div[8]/span"
 POP_UP_MESAJ1_TOO_MANY_CHARACTERS_TEXT =  "En fazla 30 karakter girebilirsiniz"
-NEİGHBOURHOOD_TOO_MANY_CHARACTERS_XPATH = "//div[@id='__next']/div/main/section/div/div/div[2]/form/div/div[11]/textarea"
+NEIGHBOURHOOD_TOO_MANY_CHARACTERS_XPATH = "//div[@id='__next']/div/main/section/div/div/div[2]/form/div/div[11]/textarea"
 POP_UP_MESAJ2_TOO_MANY_CHARACTERS_XPATH = "//*[@id='__next']/div/main/section/div/div/div[2]/form/div/div[11]/span"
 POP_UP_MESAJ2_TOO_MANY_CHARACTERS_TEXT = "En fazla 200 karakter girebilirsiniz"
 ABOUT_ME_TOO_MANY_CHARACTERS_XPATH = "//*[@id='__next']/div/main/section/div/div/div[2]/form/div/div[12]/textarea"
