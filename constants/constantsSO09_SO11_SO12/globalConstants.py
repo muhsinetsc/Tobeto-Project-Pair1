@@ -38,10 +38,9 @@ START_FULLSTACK_XPATH = "//div[@id='__next']/div/main/section[2]/div/div/div[4]/
 
  #"Frond End" sinavinin sonucunun goruntulenme durumu
 
-VIEWING_FRONEND_XPATH = "//*[@id='__next']/div/main/section[2]/div/div/div[4]/div/div[1]/button"
-VIEWING2_FRONEND_XPATH = "/html/body/div[4]/div/div/div/div/div[2]/div[2]/button"
-EXAM_RESULT_XPATH = "/html/body/div[4]/div/div/div/div/div/span"
-EXAM_RESULT_TEXT = "Test Bitti"
+VIEWING_FRONEND_XPATH = "//div[4]/div/div/button"
+VIEWING_FRONEND_TEXT = "Raporu Görüntüle"
+
 
 #Kullanicinin "Abonelige ozel degerlendirme aracları icin" bolumunun goruntuleme durumu
 
@@ -188,7 +187,16 @@ E_POSTA_REQUIRED_FIELD_MY_PERSONAL_INFORMATIONS2_XPATH = "//*[@id='__next']/div/
 
 
 
-#Profil resmi ekleme olacak
+#Profil resmi ekleme
+
+SAVE_AVATAR_XPATH = "//*[@id='__next']/div/main/section/div/div/div[2]/form/div/div[1]/div[1]/div"
+UPLOAD_FILE_XPATH = "//*[@id='__next']/div/main/section/div/div/div[2]/form/div/div[1]/div[2]/div/div/div/div[2]/div/div[4]/div[1]/div[2]/button"
+DELETE_PHOTO_XPATH = "//*[@id='__next']/div/main/section/div/div/div[2]/form/div/div[1]/div[1]/div[2]"
+YES_PHOTO_XPATH = "body > div.fade.modal.show > div > div > div.modal-footer > button:nth-child(1)"
+POP_UP_MESAJ_TOO_DELETE_PHOTO_XPATH = "//div[@id='__next']//div[@role='alert']/div[@class='toast-body']"
+POP_UP_MESAJ_DELETE_PHOTO_TEXT = "• Dosya kaldırma işlemi başarılı."
+
+
 
 
 #Fazla karakter girilme durumu

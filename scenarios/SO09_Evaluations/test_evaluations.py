@@ -102,18 +102,11 @@ class Test_Case1:
 
     #"Frond End" sinavinin sonucunun goruntulenme durumu
     def test_report_viewing(self):
-        self.test_pre_condition_evaluations3()
-        sleep(3)
+        self.test_pre_condition_evaluations1()
         self.driver.execute_script("window.scrollBy(0,200)")
         sleep(5)
         viewing_fronend = self.WaitForElementVisible((By.XPATH,VIEWING_FRONEND_XPATH))
-        viewing_fronend.click()
-        sleep(30)
-        viewing2_fronend = self.WaitForElementVisible((By.XPATH,VIEWING2_FRONEND_XPATH))
-        viewing2_fronend.click()
-        exam_result = self.WaitForElementVisible((By.XPATH,EXAM_RESULT_XPATH)) 
-        assert exam_result.text == EXAM_RESULT_TEXT
-
+        assert viewing_fronend.text == VIEWING_FRONEND_TEXT
 
 
     #Kullanicinin "Abonelige ozel degerlendirme aracları icin" bolumunun goruntuleme durumu

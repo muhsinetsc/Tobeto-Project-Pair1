@@ -155,14 +155,30 @@ class Test_Case1:
         e_posta_required_field_my_personal_informations2 = self.WaitForElementVisible((By.XPATH,E_POSTA_REQUIRED_FIELD_MY_PERSONAL_INFORMATIONS2_XPATH))
         e_posta_required_field_my_personal_informations2.click()
         
-        
-        # e_posta.send_keys(Keys.CONTROL + "a")
-        # e_posta.send_keys(Keys.DELETE)
-        # sleep(5)
+
 
 
 
     #Profil resmi ekleme olacak
+
+    def test_avatar(self):
+        self.test_pre_condition_my_personal_informations1()
+        save_avatar = self.WaitForElementVisible((By.XPATH,SAVE_AVATAR_XPATH))
+        save_avatar.click()
+        sleep(3)
+        file_path = r"C:\Users\MERVEE\Desktop\clone\Tobeto-Proje-Pair1\resim\projefoto.jpg"
+        resimadres = "/html/body/div[1]/div/main/section/div/div/div[2]/form/div/div[1]/div[2]/div/div/div/div[2]/div/div[2]/input[1]"
+        upload = self.driver.find_element(By.XPATH, resimadres).send_keys(file_path)
+        sleep(5)
+        upload_file = self.WaitForElementVisible((By.XPATH,UPLOAD_FILE_XPATH))
+        sleep(3)
+        upload_file.click()
+        delete_photo = self.WaitForElementVisible((By.XPATH,DELETE_PHOTO_XPATH))
+        delete_photo.click()
+        yes_photo = delete_photo = self.WaitForElementVisible((By.CSS_SELECTOR,YES_PHOTO_XPATH))
+        yes_photo.click()
+        pop_up_mesaj_delete_photo = self.WaitForElementVisible((By.XPATH,POP_UP_MESAJ_TOO_DELETE_PHOTO_XPATH))
+        assert pop_up_mesaj_delete_photo.text == POP_UP_MESAJ_DELETE_PHOTO_TEXT
 
 
     #Fazla karakter girilme durumu
@@ -225,17 +241,6 @@ class Test_Case1:
         sleep(3)
 
 
-        
-        # pop_up_mesaj3 = self.WaitForElementVisible((By.XPATH,"//*[@id='__next']/div/main/section/div/div/div[2]/form/div/div[6]/span[2]"))
-        # assert pop_up_mesaj2.text == "*Aboneliklerde fatura için doldurulması zorunlu alanTC Kimlik Numarası 11 Haneden Fazla olamaz"
-        # sleep(5)
-
-
-        # tc_No = self.WaitForElementVisible((By.XPATH,"//*[@id='__next']/div/main/section/div/div/div[2]/form/div/div[6]/input"))
-        # tc_No.send_keys("111222333445")
-        # pop_up_mesaj1 = self.WaitForElementVisible((By.XPATH,"//*[@id='__next']/div/main/section/div/div/div[2]/form/div/div[6]/span[2]"))
-        # assert pop_up_mesaj1.text == "TC Kimlik Numarası 11 Haneden Fazla olamaz"
-        # sleep(3)
 
 
 
